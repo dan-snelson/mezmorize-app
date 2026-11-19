@@ -1,0 +1,125 @@
+name: Bug Report
+description: Something is sideways with Mezmorize
+title: "[Bug]: "
+labels: ["bug"]
+assignees:
+  - dan-snelson
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Thank you** for taking time to file a bug report for Mezmorize!
+
+        Please complete the following form with as much detail as possible.
+
+        If you're not sure about something, do your best. (The more information included, the easier it is to investigate and _hopefully_ resolve your issue.)
+
+        **This is a public repository.** Never include personal data, quotes you don't want made public, or screenshots that show your iCloud account, Apple ID, or other identifying details.
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Before you submit
+      options:
+        - label: I am running the latest version of Mezmorize
+          required: true
+        - label: I removed personal data and any private quotes from everything below
+          required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Which platform are you using?
+      options:
+        - macOS
+        - iPhone
+        - iPad
+    validations:
+      required: true
+
+  - type: input
+    id: os-version
+    attributes:
+      label: OS version
+      placeholder: "e.g. macOS 26.1 or iOS 26.1"
+    validations:
+      required: true
+
+  - type: input
+    id: app-version
+    attributes:
+      label: Mezmorize version and build
+      description: Shown in the app's About window (macOS) or in Settings (iPhone and iPad).
+      placeholder: "e.g. 1.0 (1)"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected-area
+    attributes:
+      label: Which area looks broken?
+      options:
+        - Today's Review
+        - Mark Reviewed and scheduling
+        - Capture and edit
+        - Import Quote from URL
+        - Tile sidebar, search, and sort
+        - Reveal (Full, First Letters, Hidden)
+        - Share Quote
+        - Archive and delete
+        - Help
+        - iCloud sync
+        - Other / not sure
+    validations:
+      required: true
+
+  - type: input
+    id: import-domain
+    attributes:
+      label: Import source domain
+      description: Only if this involves Import Quote from URL. Give the domain only (not the full URL).
+      placeholder: "e.g. brainyquote.com"
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe actual behavior.
+      placeholder: |
+        Example: I tapped Mark Reviewed, but the quote still appears in Today's Review.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: What did you expect to happen?
+      placeholder: |
+        Example: The quote should leave Today's Review and be scheduled for its next review.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Numbered steps make bugs much easier to act on.
+      placeholder: |
+        1. Open Today's Review
+        2. Select a due quote
+        3. Tap Mark Reviewed
+        4. Observe the unexpected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: Drag and drop **sanitized** screenshots here. Crop out account names, iCloud details, and private quotes.
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Anything else
+      description: Include workarounds, device model, or other details that do not fit above.
