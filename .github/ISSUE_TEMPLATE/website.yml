@@ -1,0 +1,74 @@
+name: Website
+description: Report a problem with the Mezmorize web site
+title: "[Website]: "
+labels: ["documentation"]
+assignees:
+  - dan-snelson
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for web site issues: wrong or outdated information, missing details, confusing wording, broken links, typos, or layout and accessibility problems.
+
+        If the app itself behaved incorrectly, use the **Bug Report** form instead.
+
+  - type: dropdown
+    id: page
+    attributes:
+      label: Which page needs attention?
+      options:
+        - Home (index.html)
+        - Support (support.html)
+        - Privacy (privacy.html)
+        - Styling (style.css)
+        - README
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: What kind of problem is this?
+      options:
+        - Incorrect or outdated information
+        - Missing information
+        - Confusing wording
+        - Broken link
+        - Disagrees with in-app Help or README
+        - Typo or grammar issue
+        - Layout or accessibility problem
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: What is wrong today?
+      description: Describe the current problem.
+      placeholder: |
+        Example: The Support page describes a menu item that is named differently in the app.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed
+    attributes:
+      label: What should it say instead?
+      description: Suggest corrected wording, structure, or content when possible.
+    validations:
+      required: true
+
+  - type: input
+    id: affected-url
+    attributes:
+      label: Affected URL
+      description: Add the page URL or section heading.
+      placeholder: "e.g. https://dan-snelson.github.io/mezmorize-app/support.html"
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Supporting context
+      description: Add browser and device details, screenshots, or references.

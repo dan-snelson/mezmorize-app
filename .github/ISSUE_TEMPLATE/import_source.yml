@@ -1,0 +1,73 @@
+name: Import Quote Site
+description: Request a new Import Quote site or report a site that imports incorrectly
+title: "[Import]: "
+labels: ["import"]
+assignees:
+  - dan-snelson
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form when **Import Quote from URL** picks the wrong quote, author, or source, fails on a page, or when you would like a new site supported.
+
+        Mezmorize has dedicated parsers for BrainyQuote, AZ Quotes, and Gospel Library, plus a generic fallback for other pages. Imports are user-initiated, single-page fetches, and nothing is saved until you save from the form.
+
+        Only share public quote pages. Do not paste pages that need a login or that contain personal data.
+
+  - type: dropdown
+    id: request-type
+    attributes:
+      label: What is this about?
+      options:
+        - Request support for a new site
+        - Wrong quote, author, or source imported
+        - Import failed or showed an error
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: Public quote page URL
+      description: The page you tried to import (public pages only).
+      placeholder: "e.g. https://www.brainyquote.com/quotes/..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Which platform are you using?
+      options:
+        - macOS
+        - iPhone
+        - iPad
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What should have been imported?
+      description: The quote, author, and source you expected to see.
+      placeholder: |
+        Quote: ...
+        Author: ...
+        Source: ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: What was imported instead?
+      description: Describe what appeared in the form, or the error shown.
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Anything else
+      description: Add other example URLs from the same site or details that do not fit above.
