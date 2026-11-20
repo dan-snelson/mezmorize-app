@@ -20,3 +20,8 @@ img{display:block;max-width:100%;height:auto;border-radius:10px;border:1px solid
 .shots,.pair{display:grid;grid-template-columns:1fr;gap:1rem}
 .shots figure,.pair figure{margin:0}
 @media (min-width:600px){.shots,.pair{grid-template-columns:1fr 1fr}.wide{grid-column:1/-1}}
+h3{font-size:1.1rem;margin:1.5rem 0 .5rem}
+.phones{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+.phones figure{margin:0}
+.phones img{max-width:14rem;margin:0 auto}
+@media (min-width:600px){.phones{grid-template-columns:repeat(4,1fr)}}
