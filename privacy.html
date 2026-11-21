@@ -10,33 +10,44 @@
 <body>
 <header>
 <a class="brand" href="index.html"><img src="images/mezmorize_icon_128.png" alt="" width="32" height="32">Mezmorize</a>
-<nav><a href="quotes.html">Quotes</a><a href="support.html">Support</a><a href="testflight.html">TestFlight</a><a href="privacy.html">Privacy</a></nav>
+<nav><a href="quotes.html">Quotes</a><a href="support.html">Support</a><a href="privacy.html">Privacy</a></nav>
 </header>
 <main>
 <h1>Privacy</h1>
-<p>Last updated: 19-Nov-2026</p>
+<p>Last updated: 21 November 2026</p>
+<h2>Who we are</h2>
+<p>Mezmorize is made by Dan K. Snelson. For privacy questions, email <a href="mailto:support@snelson.us">support@snelson.us</a>.</p>
+<h2>The short version</h2>
 <ul>
 <li>Your quotes and review data stay on your device, stored on-disk by the app.</li>
-<li>Mezmorize sends anonymous usage counts by default. You can turn this off in Settings. There is no tracking and no advertising.</li>
 <li>There are no accounts to create.</li>
+<li>Your quotes are never sent to the developer or to analytics.</li>
+<li>Mezmorize sends anonymous usage counts by default. You can turn this off in Settings. There is no tracking and no advertising.</li>
 </ul>
 <h2>Import Quote</h2>
 <p>When you choose Import Quote and enter a web address, Mezmorize fetches that single page, only when you ask. The page is used temporarily to fill the form. Nothing is saved unless you save the quote.</p>
 <h2>Reminders</h2>
 <p>Daily review reminders are notifications created on your device. No server is involved, and nothing about your quotes is sent anywhere.</p>
 <h2>Usage Data</h2>
-<p>Mezmorize sends anonymous usage counts through <a href="https://telemetrydeck.com">TelemetryDeck</a>, a privacy-focused analytics service. This is <strong>on</strong> by default.</p>
+<p>Mezmorize sends anonymous usage counts through <a href="https://telemetrydeck.com/privacy/">TelemetryDeck</a>, a privacy-focused analytics service that processes this data on our behalf. This is <strong>on</strong> by default.</p>
 <p><strong>What is sent:</strong> counts such as quotes added (typed or imported), reviews marked and which review stage they were, whether an import worked and from what kind of site, whether reminders are on or off and when a reminder is tapped, and a daily size range for your collection (for example, 6&ndash;20 quotes). It also includes standard app metadata: platform, OS and app version, device model, and locale.</p>
-<p><strong>The identifier:</strong> a random ID is created on your device. It is sent only as a hash and is not linked to you.</p>
+<p><strong>The identifier:</strong> a hashed, app-specific device identifier. It is hashed on your device and again on TelemetryDeck&rsquo;s servers, so neither TelemetryDeck nor the developer can recover the original identifier. It is not linked to you.</p>
 <p><strong>What is never sent:</strong> quote text, authors, sources, web addresses, search text, or anything you type.</p>
-<p><strong>To turn it off:</strong> open Settings, find Privacy, and turn off Share Anonymous Usage Data. On a Mac, choose Mezmorize &rarr; Settings&hellip; (&#8984;,). On iPhone and iPad, tap the gear button. Mezmorize stops sending right away.</p>
+<p><strong>To turn it off:</strong> open Settings, find Privacy, and turn off Share Anonymous Usage Data. On a Mac, choose Mezmorize &rarr; Settings&hellip; (&#8984;,). On iPhone and iPad, tap the <strong>&hellip;</strong> menu, then Settings. Mezmorize stops sending right away.</p>
+<h2>Retention and deletion</h2>
+<!-- TODO(dan): confirm TelemetryDeck retention period -->
+<p>TelemetryDeck stores anonymous usage data under its own retention terms, described in its <a href="https://telemetrydeck.com/privacy/">privacy policy</a>. Usage data is anonymous and cannot be tied to a person, so there is no personal record for the developer to look up or delete. You can stop collection at any time by turning off Share Anonymous Usage Data, and sending stops at once. If you have questions, email <a href="mailto:support@snelson.us">support@snelson.us</a>.</p>
+<!-- DRAFT: publish only after CloudKit sync works -->
+<h2>iCloud and Apple Watch</h2>
+<p>If you use iCloud sync, your quotes sync through your private iCloud database. The developer cannot read them. The Apple Watch app reads the same data. The Apple Watch app collects no analytics.</p>
+<!-- END DRAFT: publish only after CloudKit sync works -->
 <h2>iCloud</h2>
 <p>iCloud sync is not currently active.</p>
 <h2>Questions</h2>
-<p>See <a href="support.html">Support</a>.</p>
+<p>Email <a href="mailto:support@snelson.us">support@snelson.us</a>, or see <a href="support.html">Support</a>.</p>
 </main>
 <footer>
-<p>Mezmorize &middot; <a href="index.html">Home</a> &middot; <a href="quotes.html">Quotes</a> &middot; <a href="support.html">Support</a> &middot; <a href="testflight.html">TestFlight</a> &middot; <a href="privacy.html">Privacy</a></p>
+<p>Mezmorize &middot; <a href="index.html">Home</a> &middot; <a href="quotes.html">Quotes</a> &middot; <a href="support.html">Support</a> &middot; <a href="privacy.html">Privacy</a></p>
 <p>&copy; 2026 Dan K. Snelson. All rights reserved.</p>
 </footer>
 </body>
