@@ -14,7 +14,7 @@ body:
 
         If you're not sure about something, do your best. (The more information included, the easier it is to investigate and _hopefully_ resolve your issue.)
 
-        **This is a public repository.** Never include personal data, quotes you don't want made public, or screenshots that show your iCloud account, Apple ID, or other identifying details.
+        **This is a public repository.** Never include personal data, quotes you don't want made public, or screenshots that show your Apple Account, or other identifying details.
 
   - type: checkboxes
     id: preflight
@@ -34,6 +34,7 @@ body:
         - macOS
         - iPhone
         - iPad
+        - Apple Watch
     validations:
       required: true
 
@@ -41,7 +42,7 @@ body:
     id: os-version
     attributes:
       label: OS version
-      placeholder: "e.g. macOS 26.1 or iOS 26.1"
+      placeholder: "e.g. macOS 27.2 or iOS 27.2"
     validations:
       required: true
 
@@ -49,7 +50,7 @@ body:
     id: app-version
     attributes:
       label: Mezmorize version and build
-      description: Shown in the app's About window (macOS) or in Settings (iPhone and iPad).
+      description: Shown in the app's About window (macOS) or in Settings (iPhone and iPad). For Apple Watch, give the iPhone app version.
       placeholder: "e.g. 1.0 (1)"
     validations:
       required: true
@@ -67,8 +68,11 @@ body:
         - Reveal (Full, First Letters, Hidden)
         - Share Quote
         - Archive and delete
+        - Reminders and notifications
+        - Export and import (.mezmorize files)
+        - Settings, Quote Display, and celebrations
+        - Apple Watch
         - Help
-        - iCloud sync
         - Other / not sure
     validations:
       required: true
@@ -116,7 +120,7 @@ body:
     id: screenshots
     attributes:
       label: Screenshots
-      description: Drag and drop **sanitized** screenshots here. Crop out account names, iCloud details, and private quotes.
+      description: Drag and drop **sanitized** screenshots here. Crop out account names, Apple Account details, and private quotes.
 
   - type: textarea
     id: additional-context

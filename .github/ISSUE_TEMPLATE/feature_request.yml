@@ -10,7 +10,7 @@ body:
       value: |
         **Note:** While all requests are welcome, finding available cycles to build a feature we won't use ourselves is always challenging.
 
-        Requests that keep Mezmorize short, quote-focused, and true to the Three-minute Memory Method are the easiest to accept. Mezmorize is for Apple platforms only, each item is a quote plus its author, and it does not do free-form key points, pattern extraction, or depend on AI. A watchOS app has been deferred.
+        Requests that keep Mezmorize short, quote-focused, and true to the Three-minute Memory Method are the easiest to accept. Mezmorize is for Apple platforms only, each item is a quote plus its author, and it does not do free-form key points, pattern extraction, or depend on AI. The Apple Watch companion is review-only by design.
 
   - type: textarea
     id: problem
@@ -50,7 +50,7 @@ body:
         - Sharing
         - Platforms
         - Notifications
-        - Sync
+        - Apple Watch
         - Other
     validations:
       required: true
@@ -64,6 +64,7 @@ body:
         - macOS
         - iPhone
         - iPad
+        - Apple Watch
     validations:
       required: true
 
