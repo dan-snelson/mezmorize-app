@@ -23,6 +23,7 @@
 <li>There are no accounts to create.</li>
 <li>Your quotes are never sent to the developer or to analytics.</li>
 <li>Mezmorize sends anonymous usage counts by default. You can turn this off in Settings. There is no tracking and no advertising.</li>
+<li>Mezmorize uses the network only when you import a quote from a web address and, unless you turn it off, to send anonymous usage counts.</li>
 </ul>
 <h2>Import Quote</h2>
 <p>When you choose Import Quote and enter a web address, Mezmorize fetches that single page, only when you ask. The page is used temporarily to fill the form. Nothing is saved unless you save the quote.</p>
@@ -31,17 +32,19 @@
 <h2>Usage Data</h2>
 <p>Mezmorize sends anonymous usage counts through <a href="https://telemetrydeck.com/privacy/">TelemetryDeck</a>, a privacy-focused analytics service that processes this data on our behalf. This is <strong>on</strong> by default.</p>
 <p><strong>What is sent:</strong> counts such as quotes added (typed or imported), reviews marked and which review stage they were, whether an import worked and from what kind of site, whether reminders are on or off and when a reminder is tapped, and a daily size range for your collection (for example, 6&ndash;20 quotes). It also includes standard app metadata: platform, OS and app version, device model, and locale.</p>
-<p><strong>The identifier:</strong> a hashed, app-specific device identifier. It is hashed on your device and again on TelemetryDeck&rsquo;s servers, so neither TelemetryDeck nor the developer can recover the original identifier. It is not linked to you.</p>
+<p><strong>The identifier:</strong> a hashed, app-specific device identifier. It is hashed on your device and again on TelemetryDeck&rsquo;s servers, so neither TelemetryDeck nor the developer can recover the original identifier. It is not linked to you. In App Store privacy terms, Mezmorize collects Device ID and Product Interaction data, neither linked to you, used only for analytics and never for tracking.</p>
 <p><strong>What is never sent:</strong> quote text, authors, sources, web addresses, search text, or anything you type.</p>
 <p><strong>To turn it off:</strong> open Settings, find Privacy, and turn off Share Anonymous Usage Data. On a Mac, choose Mezmorize &rarr; Settings&hellip; (&#8984;,). On iPhone and iPad, tap the <strong>&hellip;</strong> menu, then Settings. Mezmorize stops sending right away.</p>
 <h2>Retention and deletion</h2>
 <p>TelemetryDeck stores anonymous usage data under its own retention terms, described in its <a href="https://telemetrydeck.com/privacy/">privacy policy</a>. Usage data is anonymous and cannot be tied to a person, so there is no personal record for the developer to look up or delete. You can stop collection at any time by turning off Share Anonymous Usage Data, and sending stops at once. If you have questions, email <a href="mailto:support@snelson.us">support@snelson.us</a>.</p>
-<!-- DRAFT: publish only after CloudKit sync works -->
-<h2>iCloud and Apple Watch</h2>
-<p>If you use iCloud sync, your quotes sync through your private iCloud database. The developer cannot read them. The Apple Watch app reads the same data. The Apple Watch app collects no analytics.</p>
-<!-- END DRAFT: publish only after CloudKit sync works -->
+<h2>Apple Watch</h2>
+<p>The Apple Watch companion is review only. It collects no analytics and sends nothing anywhere.</p>
+<h2>Files you share</h2>
+<p>Exporting quotes creates a small .mezmorize file on your device. It goes only where you send it, such as AirDrop, Messages, Mail, or Files. Importing a file reads it on your device.</p>
 <h2>iCloud</h2>
-<p>iCloud sync is not currently active.</p>
+<p>Mezmorize does not currently sync your quotes through iCloud.</p>
+<h2>Acknowledgements</h2>
+<p>Anonymous usage statistics use the TelemetryDeck SwiftSDK, MIT License, Copyright (c) 2020 Daniel Jilg.</p>
 <h2>Questions</h2>
 <p>Email <a href="mailto:support@snelson.us">support@snelson.us</a>, or see <a href="support.html">Support</a>.</p>
 </main>
