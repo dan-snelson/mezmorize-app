@@ -1,0 +1,27 @@
+name: Issue sync tests
+
+# Runs the unit tests of the issue sync whenever it changes. The tests use an in-memory fake
+# of the GitHub API, so they need no secrets. The script is shared with the other repository
+# (dan-snelson/Mezmorize), so a change here must be made there too (see the note at the top
+# of sync.mjs).
+
+on:
+  pull_request:
+    paths:
+      - ".github/scripts/issue-sync/**"
+      - ".github/workflows/sync-issues-to-private.yml"
+      - ".github/workflows/issue-sync-tests.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - run: node --version
+      - run: node --test .github/scripts/issue-sync/sync.test.mjs
