@@ -20,6 +20,7 @@
 //  What stays in sync
 //    title and body ........ public -> private (the private body is rebuilt from the public one)
 //    type labels ........... public -> private (bug, enhancement, documentation, ...)
+//    issue type ............ public -> private (Bug, Feature, Task, ...); skipped with a log line if the private repo lacks that type
 //    comments .............. public -> private (all); private -> public only when a private
 //                            comment starts with /public
 //    open/closed ........... both ways
@@ -208,13 +209,13 @@ export function createApi({ token, dryRun = false, log = console.log, fetchImpl 
 	// memory so the rest of the run sees them, and an issue created in the run has a negative number.
 	let fakeId = 0;
 	const overlay = new Map();
-	const asIssue = (o) => ({ ...o, labels: o.labels.map((name) => ({ name })) });
+	const asIssue = (o) => ({ ...o, labels: o.labels.map((name) => ({ name })), type: typeof o.type === 'string' ? { name: o.type } : (o.type ?? null) });
 
 	async function dryWrite(method, path, body) {
 		log(`[dry-run] ${method} ${path}${body ? ` ${JSON.stringify(body).slice(0, 160)}` : ''}`);
 		if (method === 'POST' && /^\/repos\/[^/]+\/[^/]+\/issues$/.test(path)) {
 			fakeId -= 1;
-			const created = { number: fakeId, id: fakeId, html_url: '', state: 'open', state_reason: null, title: body.title, body: body.body ?? '', labels: [...(body.labels ?? [])] };
+			const created = { number: fakeId, id: fakeId, html_url: '', state: 'open', state_reason: null, title: body.title, body: body.body ?? '', labels: [...(body.labels ?? [])], type: body.type ?? null };
 			overlay.set(`${path}/${fakeId}`, created);
 			return asIssue(created);
 		}
@@ -222,7 +223,7 @@ export function createApi({ token, dryRun = false, log = console.log, fetchImpl 
 			const current = overlay.get(path) ?? { ...(await request('GET', path)), labels: [] };
 			const labels = overlay.has(path) ? current.labels : (await request('GET', path)).labels.map((l) => l.name);
 			const merged = { ...current, labels };
-			for (const key of ['title', 'body', 'state', 'state_reason']) if (body[key] !== undefined) merged[key] = body[key];
+			for (const key of ['title', 'body', 'state', 'state_reason', 'type']) if (body[key] !== undefined) merged[key] = body[key];
 			if (merged.state === 'open') merged.state_reason = null;
 			overlay.set(path, merged);
 			return asIssue(merged);
@@ -286,6 +287,9 @@ export function createApi({ token, dryRun = false, log = console.log, fetchImpl 
 // Reconcile one public issue with its private twin
 // ---------------------------------------------------------------------------
 
+// api() errors read "POST path -> 422 ..."; a 422 on a type means the private repo lacks that type.
+const isUnprocessable = (error) => / -> 422\b/.test(String(error?.message ?? ''));
+
 async function findMirror(priv, publicNumber) {
 	const issues = await priv.paginate(`/repos/${PRIVATE_REPO}/issues?labels=${encodeURIComponent(MIRROR_LABEL)}&state=all`);
 	const wanted = `${PUBLIC_REPO}#${publicNumber}`;
@@ -330,11 +334,19 @@ export async function reconcile({ pub, priv, publicNumber, log = console.log }) 
 	let created = false;
 	if (!Q) {
 		const base = buildBase(P);
-		Q = await priv.post(`/repos/${PRIVATE_REPO}/issues`, {
+		const payload = {
 			title: P.title,
 			body: buildPrivateBody(P, base),
 			labels: [MIRROR_LABEL, ...pick(labelNames(P), TYPE_LABELS), ...base.l],
-		});
+		};
+		const wantedType = P.type?.name ?? null;
+		try {
+			Q = await priv.post(`/repos/${PRIVATE_REPO}/issues`, { ...payload, type: wantedType });
+		} catch (error) {
+			if (!wantedType || !isUnprocessable(error)) throw error;
+			log(`Private repo has no issue type ${wantedType}; created without it.`);
+			Q = await priv.post(`/repos/${PRIVATE_REPO}/issues`, payload);
+		}
 		if (P.state === 'closed') Q = await setState(priv, PRIVATE_REPO, Q.number, P);
 		created = true;
 		log(`Created private issue #${Q.number} for public #${publicNumber}.`);
@@ -391,9 +403,17 @@ export async function reconcile({ pub, priv, publicNumber, log = console.log }) 
 	if (Q.title !== P.title) patch.title = P.title;
 	const desiredBody = buildPrivateBody(P, newBase);
 	if (norm(Q.body) !== norm(desiredBody)) patch.body = desiredBody;
+	if ((Q.type?.name ?? null) !== (P.type?.name ?? null)) patch.type = P.type?.name ?? null;
 	if (Object.keys(patch).length) {
-		Q = await priv.patch(qPath, patch);
-		log(`Updated ${Object.keys(patch).join(' and ')} of private #${Q.number}.`);
+		try {
+			Q = await priv.patch(qPath, patch);
+		} catch (error) {
+			if (!patch.type || !isUnprocessable(error)) throw error;
+			log(`Private repo has no issue type ${patch.type}; skipped.`);
+			delete patch.type;
+			if (Object.keys(patch).length) Q = await priv.patch(qPath, patch);
+		}
+		if (Object.keys(patch).length) log(`Updated ${Object.keys(patch).join(' and ')} of private #${Q.number}.`);
 	}
 
 	await reconcileComments({ pub, priv, publicNumber, privateNumber: Q.number, log });

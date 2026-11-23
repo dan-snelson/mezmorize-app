@@ -17,16 +17,22 @@ import * as S from './sync.mjs';
 
 function createFake() {
 	const repos = {
-		[S.PUBLIC_REPO]: { issues: [], comments: [], nextIssue: 290, nextComment: 5000 },
-		[S.PRIVATE_REPO]: { issues: [], comments: [], nextIssue: 150, nextComment: 9000 },
+		[S.PUBLIC_REPO]: { issues: [], comments: [], nextIssue: 290, nextComment: 5000, allowedTypes: null },
+		[S.PRIVATE_REPO]: { issues: [], comments: [], nextIssue: 150, nextComment: 9000, allowedTypes: null },
 	};
 	const writes = [];
 	const sameName = (a, b) => a.toLowerCase() === b.toLowerCase();
 	const issueView = (repo, i) => ({
 		...i,
 		labels: i.labels.map((name) => ({ name })),
+		type: i.type ? { name: i.type } : null,
 		html_url: `https://github.com/${repo}/issues/${i.number}`,
 	});
+	// A repo with allowedTypes set answers 422 to a type it does not define (null = accepts any).
+	const checkType = (repo, method, path, type) => {
+		const allowed = repos[repo].allowedTypes;
+		if (type && allowed && !allowed.includes(type)) throw new Error(`${method} ${path} -> 422 {"message":"Validation Failed"}`);
+	};
 	const commentView = (repo, c) => ({ ...c, html_url: `https://github.com/${repo}/issues/${c.issue}#issuecomment-${c.id}` });
 	const issueOf = (repo, n) => {
 		const issue = repos[repo].issues.find((i) => i.number === Number(n));
@@ -48,7 +54,9 @@ function createFake() {
 					const label = params.get('labels');
 					return repos[repo].issues.filter((i) => !label || i.labels.some((l) => sameName(l, label))).map((i) => issueView(repo, i));
 				}
+				checkType(repo, method, path, body.type);
 				const issue = {
+					type: body.type ?? null,
 					number: repos[repo].nextIssue++,
 					title: body.title,
 					body: body.body ?? '',
@@ -98,6 +106,8 @@ function createFake() {
 					throw new Error(`404 ${path}`);
 				}
 				if (method === 'PATCH') {
+					if (body.type !== undefined) checkType(repo, method, path, body.type);
+					if (body.type !== undefined) issue.type = body.type;
 					if (body.title !== undefined) issue.title = body.title;
 					if (body.body !== undefined) issue.body = body.body;
 					if (body.state !== undefined) {
@@ -124,8 +134,8 @@ function createFake() {
 		client,
 		issue: (repo, n) => issueOf(repo, n),
 		comments: (repo, n) => repos[repo].comments.filter((c) => c.issue === Number(n)),
-		addIssue(repo, { title, body = '', labels = [], user = 'reporter' }) {
-			const issue = { number: repos[repo].nextIssue++, title, body, state: 'open', state_reason: null, labels: [...labels], user: { login: user } };
+		addIssue(repo, { title, body = '', labels = [], user = 'reporter', type = null }) {
+			const issue = { number: repos[repo].nextIssue++, title, body, state: 'open', state_reason: null, labels: [...labels], type, user: { login: user } };
 			repos[repo].issues.push(issue);
 			return issue;
 		},
@@ -287,6 +297,85 @@ test('title, body and type labels follow the public issue; private extras are re
 	assert.equal(S.readMarker(Q().body, 'public'), `${S.PUBLIC_REPO}#${P.number}`);
 	assert.deepEqual([...Q().labels].sort(), ['enhancement', 'from-public']);
 	assert.equal(gh.mirrors().length, 1);
+});
+
+// ---------------------------------------------------------------------------
+// Issue type
+// ---------------------------------------------------------------------------
+
+test('the issue type is copied when the private issue is created', async () => {
+	const { run, Q } = setup({ type: 'Bug' });
+	await run();
+	assert.equal(Q().type, 'Bug');
+});
+
+test('an issue with no type is created with no type', async () => {
+	const { run, Q } = setup();
+	await run();
+	assert.equal(Q().type, null);
+});
+
+test('a type change on the public issue reaches the private issue, and a second run is quiet', async () => {
+	const { gh, P, run, Q } = setup({ type: 'Bug' });
+	await run();
+	P.type = 'Feature';
+	await run();
+	assert.equal(Q().type, 'Feature');
+	const before = gh.writes.length;
+	await run();
+	assert.equal(gh.writes.length, before);
+});
+
+test('clearing the type on the public issue clears it on the private issue', async () => {
+	const { P, run, Q } = setup({ type: 'Bug' });
+	await run();
+	P.type = null;
+	await run();
+	assert.equal(Q().type, null);
+});
+
+test('the public type wins over a type set only on the private issue', async () => {
+	const { gh, P, run, Q } = setup({ type: 'Bug' });
+	await run();
+	gh.issue(S.PRIVATE_REPO, Q().number).type = 'Task';
+	await run();
+	assert.equal(Q().type, 'Bug');
+	assert.equal(P.type, 'Bug');
+});
+
+test('a private repo without the type: creation still succeeds without it', async () => {
+	const { gh, P, Q } = setup({ type: 'Bug' });
+	gh.repos[S.PRIVATE_REPO].allowedTypes = ['Task'];
+	const logs = [];
+	const outcome = await S.reconcile({ pub: gh.client('github-actions'), priv: gh.client('maintainer-pat'), publicNumber: P.number, log: (m) => logs.push(m) });
+	assert.equal(outcome.result, 'created');
+	assert.equal(Q().type, null);
+	assert.deepEqual([...Q().labels].sort(), ['bug', 'from-public']);
+	assert.ok(logs.some((m) => m.includes('no issue type Bug')));
+});
+
+test('a private repo without the type: the type is skipped, other fields still sync, the run succeeds', async () => {
+	const { gh, P, run, Q } = setup({ type: 'Bug' });
+	await run();
+	gh.repos[S.PRIVATE_REPO].allowedTypes = ['Task'];
+	P.type = 'Feature';
+	P.title = 'Menu bar icon vanishes';
+	P.labels = ['enhancement'];
+	const logs = [];
+	const outcome = await S.reconcile({ pub: gh.client('github-actions'), priv: gh.client('maintainer-pat'), publicNumber: P.number, log: (m) => logs.push(m) });
+	assert.equal(outcome.result, 'synced');
+	assert.equal(Q().type, 'Bug', 'the private type is left alone');
+	assert.equal(Q().title, 'Menu bar icon vanishes');
+	assert.deepEqual([...Q().labels].sort(), ['enhancement', 'from-public']);
+	assert.ok(logs.some((m) => m.includes('Private repo has no issue type Feature; skipped.')));
+
+	// It retries on every run and still does not fail.
+	assert.equal((await run()).result, 'synced');
+
+	// Once the private repo defines the type, it is copied.
+	gh.repos[S.PRIVATE_REPO].allowedTypes = null;
+	await run();
+	assert.equal(Q().type, 'Feature');
 });
 
 // ---------------------------------------------------------------------------

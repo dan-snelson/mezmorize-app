@@ -2,6 +2,7 @@ name: Website
 description: Report a problem with the Mezmorize web site
 title: "[Website]: "
 labels: ["documentation"]
+type: Task
 assignees:
   - dan-snelson
 body:
