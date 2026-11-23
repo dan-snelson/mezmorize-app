@@ -2,6 +2,7 @@ name: Import Quote Site
 description: Request a new Import Quote site or report a site that imports incorrectly
 title: "[Import]: "
 labels: ["import"]
+type: Task
 assignees:
   - dan-snelson
 body:
