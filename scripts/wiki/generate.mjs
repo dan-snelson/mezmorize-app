@@ -47,6 +47,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 export const SITE_URL = 'https://dan-snelson.github.io/mezmorize-app/';
 export const SUPPORT_URL = `${SITE_URL}support.html`;
+export const DISCUSSIONS_URL = 'https://github.com/dan-snelson/mezmorize-app/discussions';
 export const FOOTER_TEXT = "Generated from the app's in-app Help. Do not edit on GitHub.";
 
 const CONTAINERS = new Set(['ScrollView', 'VStack', 'LazyVStack', 'Group']);
@@ -630,8 +631,12 @@ export function generate(source, staticPages = {}) {
 	if (extra.length) home.push(renderBlocks(extra));
 	files['Home.md'] = `${home.join('\n\n')}\n`;
 
-	files['_Sidebar.md'] = `${[`- ${link('Home', 'Home')}`, ...allPages.map((p) => `- ${link(p.title, p.name)}`)].join('\n')}\n`;
-	files['_Footer.md'] = `${FOOTER_TEXT} ${link('Mezmorize web site', SITE_URL)}\n`;
+	files['_Sidebar.md'] = `${[
+		`- ${link('Home', 'Home')}`,
+		...allPages.map((p) => `- ${link(p.title, p.name)}`),
+		`- ${link('Discussions', DISCUSSIONS_URL)}`,
+	].join('\n')}\n`;
+	files['_Footer.md'] = `${FOOTER_TEXT} ${link('Mezmorize web site', SITE_URL)} · ${link('Discussions', DISCUSSIONS_URL)}\n`;
 	return files;
 }
 

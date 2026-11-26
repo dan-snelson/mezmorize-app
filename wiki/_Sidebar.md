@@ -10,3 +10,4 @@
 - [Privacy](Privacy)
 - [Apple Watch](Apple-Watch)
 - [Contact](Contact)
+- [Discussions](https://github.com/dan-snelson/mezmorize-app/discussions)

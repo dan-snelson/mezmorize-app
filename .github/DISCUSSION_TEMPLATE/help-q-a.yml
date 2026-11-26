@@ -1,0 +1,47 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Thank you** for asking about Mezmorize!
+
+        Before you post, check the [wiki](https://github.com/dan-snelson/mezmorize-app/wiki) (generated from the in-app Help) and the [Support page](https://dan-snelson.github.io/mezmorize-app/support.html). Many answers about the Three-minute Memory Method and using Mezmorize are already there.
+
+        If the app crashed or behaved incorrectly, please use the [Bug Report](https://github.com/dan-snelson/mezmorize-app/issues/new/choose) issue form instead.
+
+        **This is a public repository.** Never include personal data, quotes you don't want made public, or screenshots that show your Apple Account, or other identifying details.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: What is your question?
+      description: Describe what you are trying to do and where you are stuck.
+      placeholder: |
+        Example: How do I see which quotes are due for review tomorrow?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Which platform are you using?
+      options:
+        - iPhone
+        - iPad
+        - Mac
+        - Apple Watch
+        - Multiple platforms
+    validations:
+      required: true
+
+  - type: input
+    id: app-version
+    attributes:
+      label: Mezmorize version and build
+      description: Shown in the app's About window (macOS) or in Settings (iPhone and iPad). For Apple Watch, give the iPhone app version.
+      placeholder: "e.g. 1.0 (1)"
+
+  - type: textarea
+    id: what-you-tried
+    attributes:
+      label: What have you tried?
+      description: Include Help topics you read or steps you already took.

@@ -1,0 +1,42 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Thank you** for sharing a quote worth memorizing!
+
+        Please share only quotes that are in the public domain or short, attributed excerpts. Do not post long passages from copyrighted works.
+
+        If the app crashed or behaved incorrectly, please use the [Bug Report](https://github.com/dan-snelson/mezmorize-app/issues/new/choose) issue form instead.
+
+        **This is a public repository.** Never include personal data, quotes you don't want made public, or screenshots that show your Apple Account, or other identifying details.
+
+  - type: textarea
+    id: quote
+    attributes:
+      label: Quote
+      description: The exact wording of the quote.
+    validations:
+      required: true
+
+  - type: input
+    id: source
+    attributes:
+      label: Author and source
+      description: Who said or wrote it, and where it comes from.
+      placeholder: "e.g. Marcus Aurelius, Meditations"
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why is it worth memorizing?
+      description: Share what the quote means to you or when it has helped.
+
+  - type: checkboxes
+    id: shareable
+    attributes:
+      label: Before you submit
+      options:
+        - label: This quote is in the public domain or is a short, attributed excerpt
+          required: true

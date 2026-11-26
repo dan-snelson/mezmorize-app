@@ -20,6 +20,7 @@ const fixturePath = path.join(here, 'fixtures', 'HelpView.sample.swift');
 const fixture = fs.readFileSync(fixturePath, 'utf8');
 
 const SITE = 'https://dan-snelson.github.io/mezmorize-app/';
+const DISCUSSIONS = 'https://github.com/dan-snelson/mezmorize-app/discussions';
 
 const expected = {
 	'Home.md': [
@@ -87,9 +88,10 @@ const expected = {
 		'- [Getting quotes in](Getting-Quotes-In)',
 		'- [iCloud Sync](iCloud-Sync)',
 		'- [Contact](Contact)',
+		`- [Discussions](${DISCUSSIONS})`,
 		'',
 	].join('\n'),
-	'_Footer.md': `Generated from the app's in-app Help. Do not edit on GitHub. [Mezmorize web site](${SITE})\n`,
+	'_Footer.md': `Generated from the app's in-app Help. Do not edit on GitHub. [Mezmorize web site](${SITE}) · [Discussions](${DISCUSSIONS})\n`,
 };
 
 test('fixture generates the exact Markdown for every page', () => {
