@@ -1,0 +1,4 @@
+- Your quotes sync through your private iCloud account across your Mac, iPhone, iPad, and Apple Watch.
+- Celebrations and Quote Display settings sync too. Reminders and Privacy settings stay on each device.
+- Settings → iCloud shows whether iCloud is available on this device, and why not when it isn't.
+- When iCloud is not available, quotes stay on this device and sync when it is.

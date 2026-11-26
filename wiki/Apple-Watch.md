@@ -1,0 +1,1 @@
+The Apple Watch companion is for review only: see Today’s list, open a quote, tap Mark Reviewed when it is due, and tap the quote to cycle Full, First Letters, and Hidden. Adding, editing, searching, and Settings are on Mac, iPhone, and iPad.
