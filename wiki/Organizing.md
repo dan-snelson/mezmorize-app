@@ -13,6 +13,7 @@
 ## Favorites
 
 - Tap the star in a quote's detail to mark it a favorite. It then appears in the Favorites tile.
+- On Apple Watch, swipe up or turn the Digital Crown from Today to see Favorites.
 
 ## Archive and delete
 
