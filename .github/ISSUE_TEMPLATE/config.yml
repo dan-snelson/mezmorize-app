@@ -3,3 +3,6 @@ contact_links:
   - name: Mezmorize Help and Support
     url: https://dan-snelson.github.io/mezmorize-app/support.html
     about: Read the Support page and the in-app Help for answers about the Three-minute Memory Method and using Mezmorize before opening an issue.
+  - name: Questions and discussion
+    url: https://github.com/dan-snelson/mezmorize-app/discussions/categories/help-q-a
+    about: Ask questions, float ideas, and share quotes in GitHub Discussions. Use issues only for bugs and concrete feature requests.
