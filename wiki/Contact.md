@@ -1,0 +1,1 @@
+Email [support@snelson.us](mailto:support@snelson.us) with questions, problems, or ideas. You can also open an issue on [GitHub](https://github.com/dan-snelson/mezmorize-app/issues). Please do not post personal information in public issues.

@@ -1,0 +1,52 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Thank you** for testing the Mezmorize beta!
+
+        Crashes and screenshots are best sent through TestFlight: on iPhone or iPad, take a screenshot in the app and tap **Share Beta Feedback**; on Mac, choose **Send Beta Feedback** from the TestFlight app. See the [TestFlight page](https://dan-snelson.github.io/mezmorize-app/testflight.html) for details.
+
+        If you have a reproducible bug, please use the [Bug Report](https://github.com/dan-snelson/mezmorize-app/issues/new/choose) issue form instead.
+
+        **This is a public repository.** Never include personal data, quotes you don't want made public, or screenshots that show your Apple Account, or other identifying details.
+
+  - type: input
+    id: build
+    attributes:
+      label: Beta version and build
+      description: Shown in the TestFlight app next to Mezmorize.
+      placeholder: "e.g. 1.0 (1)"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Which platform are you using?
+      options:
+        - iPhone
+        - iPad
+        - Mac
+        - Apple Watch
+        - Multiple platforms
+    validations:
+      required: true
+
+  - type: textarea
+    id: feedback
+    attributes:
+      label: Feedback
+      description: What worked well, what felt off, or what was confusing?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: If your feedback is about specific behavior, numbered steps help.
+      placeholder: |
+        1. Open Today's Review
+        2. Select a due quote
+        3. Tap Mark Reviewed
+        4. Observe the behavior

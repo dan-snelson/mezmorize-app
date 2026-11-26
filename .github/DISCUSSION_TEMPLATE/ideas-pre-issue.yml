@@ -1,0 +1,47 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this category to float an idea and gather feedback **before** it becomes a [Feature Request](https://github.com/dan-snelson/mezmorize-app/issues/new/choose) issue. Ideas that gain support and fit Mezmorize can be turned into a feature request.
+
+        Ideas that keep Mezmorize short, quote-focused, and true to the Three-minute Memory Method are the easiest to accept. Mezmorize is for Apple platforms only, each item is a quote plus its author, and it does not do free-form key points, pattern extraction, or depend on AI. The Apple Watch companion is review-only by design.
+
+        If the app crashed or behaved incorrectly, please use the [Bug Report](https://github.com/dan-snelson/mezmorize-app/issues/new/choose) issue form instead.
+
+        **This is a public repository.** Never include personal data, quotes you don't want made public, or screenshots that show your Apple Account, or other identifying details.
+
+  - type: textarea
+    id: idea
+    attributes:
+      label: What is your idea?
+      description: Describe what Mezmorize could do.
+      placeholder: |
+        Example: Add a tile that groups quotes by author.
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would it solve?
+      description: Describe the pain in concrete terms.
+      placeholder: |
+        Example: I want to find quotes by a specific author faster.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you have considered
+      description: Include workarounds or partial solutions you already tried.
+
+  - type: checkboxes
+    id: platforms
+    attributes:
+      label: Which platforms should this cover?
+      options:
+        - label: iPhone
+        - label: iPad
+        - label: Mac
+        - label: Apple Watch
