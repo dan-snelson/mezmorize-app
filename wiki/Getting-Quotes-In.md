@@ -14,6 +14,8 @@ Paste a web page URL instead of typing. It works best with a link to a single qu
 
 Or share a link to Mezmorize from Safari, Gospel Library, or any app: choose Mezmorize in the Share sheet (the Share menu on a Mac). The page is fetched and the form appears there. Tap Save to add the quote, or Cancel to add nothing.
 
+On a Mac, if Mezmorize is missing from the Share menu, choose Share → Edit Extensions… (or System Settings → General → Login Items & Extensions → Sharing) and turn on Mezmorize. macOS turns new Share extensions off, and apps can’t turn them on.
+
 From Safari, select text in one paragraph or verse first (iPhone and iPad). On a Mac, Safari shares the whole page: copy the paragraph’s link instead.
 
 You can also share one .csv or .mezmorize file to Mezmorize, for example from Files or Finder. The import preview appears there. Choose Import to add the quotes you selected, or Cancel to add nothing. TSV files are not accepted in the Share sheet: use Open With or Import from File… instead.
