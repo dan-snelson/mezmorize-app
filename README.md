@@ -1,24 +1,25 @@
-# Mezmorize web site
+# Mezmorize
 
-Static web site for Mezmorize, a native app for macOS, iOS, and iPadOS, with a review-only Apple Watch companion, that applies the Three-minute Memory Method to quotable quotes.
+[![Mezmorize](images/social-preview.png)](https://dan-snelson.github.io/mezmorize-app/)
 
-This repository contains the public site only (no app source code).
-It is deployed from the `main` branch via GitHub Pages at https://dan-snelson.github.io/mezmorize-app/.
+Mezmorize helps you memorize quotable quotes with the Three-minute Memory Method.
+It's a native app for macOS, iOS, and iPadOS, with a review-only Apple Watch companion.
 
-The site includes a TestFlight page with beta-testing instructions.
+## Get started
 
-## Discussions
+- [Website](https://dan-snelson.github.io/mezmorize-app/) — what Mezmorize does, features, and screenshots
+- [Join the beta on TestFlight](https://dan-snelson.github.io/mezmorize-app/testflight.html) — try it early
+- [Quotes](https://dan-snelson.github.io/mezmorize-app/quotes.html) — import quotes from the web or download ready-made collections
+- [Support](https://dan-snelson.github.io/mezmorize-app/support.html) — help and contact
+- [Privacy](https://dan-snelson.github.io/mezmorize-app/privacy.html) — what happens to your data
 
-Use [GitHub Discussions](https://github.com/dan-snelson/mezmorize-app/discussions) for questions, ideas, quote sharing, and TestFlight feedback. Report bugs as [issues](https://github.com/dan-snelson/mezmorize-app/issues/new/choose).
+## Community and help
 
-## Wiki
+- [Wiki](https://github.com/dan-snelson/mezmorize-app/wiki) — how-to guides for using the app
+- [Discussions](https://github.com/dan-snelson/mezmorize-app/discussions) — questions, ideas, quote sharing, and TestFlight feedback
+- [Report a bug](https://github.com/dan-snelson/mezmorize-app/issues/new/choose)
 
-The [wiki](https://github.com/dan-snelson/mezmorize-app/wiki) is generated from the app's in-app Help (`Mezmorize/HelpView.swift` in the app repository, checked out next to this one as `../Mezmorize`). Do not edit it on GitHub.
+## About this repository
 
-```sh
-node --test scripts/wiki/          # test the generator
-node scripts/wiki/generate.mjs     # regenerate wiki/ from HelpView.swift
-scripts/wiki/publish.sh            # regenerate and push to the wiki
-```
-
-Pages for content that is only on the site live in `wiki-static/` and are copied as-is.
+This repository holds the public web site only; the app's source code isn't here.
+See [LICENSE](LICENSE).
