@@ -4,6 +4,7 @@
 - [Getting quotes in](Getting-Quotes-In)
 - [Reviewing](Reviewing)
 - [Study Mode](Study-Mode)
+- [Widgets](Widgets)
 - [Organizing](Organizing)
 - [Settings](Settings)
 - [iCloud Sync](iCloud-Sync)
