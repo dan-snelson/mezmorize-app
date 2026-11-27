@@ -29,7 +29,7 @@ You can also share one .csv or .mezmorize file to Mezmorize, for example from Fi
 
 - **A quote page:** the quote, author, and link (and the book when the page names one).
 - **A scripture verse (or a range of verses):** the verse text, the volume, and a citation such as 1 Nephi 3:7. The author is left blank.
-- **A hymn link:** all the verses, one line per row, the text author, and a title with the hymn’s book and number.
+- **A hymn link:** all the verses, one line per row, the text author, and a title with the hymn’s book and number. A chorus is kept once, where it first appears. The whole hymn is always imported.
 - **A single paragraph of a general conference talk, a magazine article, or a manual:** that paragraph, the speaker as the author, the talk title, and a citation such as October 2026 general conference with the link. Use Copy Link or Share on the paragraph in Gospel Library, or the link icon beside it on the website. On iPhone and iPad, you can also select text in the paragraph in Safari and share the page; on a Mac, copy the paragraph’s link instead. Whole talks aren’t imported.
 - **A post on X:** the full post text, the author’s name, and the link. For X posts, Mezmorize asks X’s embed service (publish.x.com) for that one post in place of the page. A long post may end with “…” because X shares only its first part. Finish the text in the form before you save.
 - **Other pages:** imported on a best-effort basis.
@@ -45,7 +45,7 @@ If a site blocks the request, you are offline, or no quote is found, choose Ente
 3. Choose Mezmorize or CSV.
 4. Choose Share… (AirDrop, Messages, Mail, Files) or Save to File….
 
-> **Note:** Either file holds only the quote, author, and source, not your review progress or your Applies Memory Method setting. A CSV file opens in Numbers and Excel, and you can import it back into Mezmorize.
+> **Note:** Either file holds only the quote, author, and source, not your review progress or your Applies Memory Method setting. A CSV file has the columns quote, author, sourceTitle, and sourceReference. It opens in Numbers and Excel, and you can import it back into Mezmorize.
 
 ## Import from a file
 
