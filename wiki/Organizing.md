@@ -13,6 +13,7 @@
 ## Favorites
 
 - Tap the star in a quote's detail to mark it a favorite. It then appears in the Favorites tile.
+- On Apple Watch, swipe up or turn the Digital Crown from Today to see Favorites.
 
 ## Archive and delete
 
@@ -22,5 +23,6 @@
 ## Share
 
 - The Share button in the quote detail sends the quote, author, and source as plain text through the system share sheet.
+- When the source has a web link, tap (click on a Mac) the underlined source to open it in your browser.
 
-> **Note:** Sharing never changes the schedule.
+> **Note:** Sharing or opening a link never changes the schedule.
